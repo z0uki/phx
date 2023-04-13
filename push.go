@@ -156,7 +156,7 @@ func (p *Push) timeout() {
 func (p *Push) reset() {
 	p.cancelTimeout()
 	if p.Ref != 0 {
-		p.channel.Off(p.Ref)
+		p.channel.socket.Off(p.Ref)
 	}
 	p.Ref = 0
 }
