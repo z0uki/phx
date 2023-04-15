@@ -1,6 +1,7 @@
 package phx
 
 import (
+	"crypto/tls"
 	"errors"
 	"fmt"
 	"github.com/gorilla/websocket"
@@ -33,8 +34,10 @@ type Websocket struct {
 }
 
 func NewWebsocket(handler TransportHandler) *Websocket {
+	dialer := websocket.DefaultDialer
+	dialer.TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 	return &Websocket{
-		Dialer:  websocket.DefaultDialer,
+		Dialer:  dialer,
 		Handler: handler,
 	}
 }
